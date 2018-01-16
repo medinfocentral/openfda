@@ -104,7 +104,7 @@ type DrugLabel struct {
 	RecentMajorChanges                []string `json:"recent_major_changes,omitempty" bson:"recent_major_changes,omitempty"`
 	Microbiology                      []string `json:"microbiology,omitempty" bson:"microbiology,omitempty"`
 	PackageLabelPrincipalDisplayPanel []string `json:"package_label_principal_display_panel,omitempty" bson:"package_label_principal_display_panel,omitempty"`
-	SPLUnclassifiedSection            []string `json:"spl_unclassified_section.omitempty" bson:"spl_unclassified_section.omitempty"`
+	SPLUnclassifiedSection            []string `json:"spl_unclassified_section,omitempty" bson:"spl_unclassified_section,omitempty"`
 }
 
 func (label DrugLabel) String() string {
