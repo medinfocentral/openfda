@@ -6,7 +6,7 @@ import (
 )
 
 // Label specifies a label as described on open.fda.gov
-type Label struct {
+type DrugLabel struct {
 	//
 	// openfda drug label specification
 	//
@@ -107,7 +107,7 @@ type Label struct {
 	SPLUnclassifiedSection            []string `json:"spl_unclassified_section.omitempty" bson:"spl_unclassified_section.omitempty"`
 }
 
-func (label Label) String() string {
+func (label DrugLabel) String() string {
 	return fmt.Sprintf("%s \"%s\" \"%s\"", label.SetID, label.OpenFDA.BrandName, label.OpenFDA.GenericName)
 }
 

@@ -6,7 +6,7 @@ import (
 	"unicode/utf8"
 )
 
-func (process *DrugLabelsFileProcessor) processLabel(label *Label) *Label {
+func (process *DrugLabelsFileProcessor) processLabel(label *DrugLabel) *DrugLabel {
 	var wg sync.WaitGroup
 
 	wg.Add(1)
@@ -179,7 +179,7 @@ func baseSufixSanitizer(targets *[]attributeFilterMapHelper) {
 	}
 }
 
-func cleanOpenFDA(label *Label) {
+func cleanOpenFDA(label *DrugLabel) {
 	baseSufixSanitizer(&[]attributeFilterMapHelper{
 		{&label.OpenFDA.PharmClassEPC, []string{
 			" [PE]", " [pe]",
@@ -209,7 +209,7 @@ func cleanOpenFDA(label *Label) {
 // id: 3dba3387-f213-464d-b75d-29eeacbd888c, has "OVERAGE Acute: ..." prefix
 // id: 9edc0343-7c47-42a3-b63e-40295e9ec17, has "Overdosage Section" prefix
 // id: 4a26a655-b559-4a11-b487-d6c6b5a4148e, has strange "OVERDOSAGE Human Experience" prefix
-func cleanAbuseAndOverdosage(label *Label) {
+func cleanAbuseAndOverdosage(label *DrugLabel) {
 	basePrefixSanitizer(&[]attributeFilterMapHelper{
 		{&label.Overdosage, []string{"overdosage", "overdosage section"}},
 		{&label.Dependence, []string{"dependence"}},
@@ -221,7 +221,7 @@ func cleanAbuseAndOverdosage(label *Label) {
 
 // sanitizeAdverseEffectsAndInteractions cleans up attributes:
 // AdverseReactionsTable, AdverseReactions, DrugInteractions, DrugAndOrLaboratoryTestInteractions
-func cleanAdverseEffectsAndInteractions(label *Label) {
+func cleanAdverseEffectsAndInteractions(label *DrugLabel) {
 	basePrefixSanitizer(&[]attributeFilterMapHelper{
 		{&label.AdverseReactions, []string{"adverse reactions", "Adverse Reactions "}},
 		{&label.DrugInteractions, []string{"Drug Interactions"}},
@@ -234,7 +234,7 @@ func cleanAdverseEffectsAndInteractions(label *Label) {
 	})
 }
 
-func cleanClinicalPharmacology(label *Label) {
+func cleanClinicalPharmacology(label *DrugLabel) {
 	basePrefixSanitizer(&[]attributeFilterMapHelper{
 		{&label.ClinicalPharmacology, []string{"Clinical Pharmacology", "Mechanism of Action "}},
 		// id: 23d8af55-f00f-4605-85ca-20d076990c88 has some strange long numbers
@@ -244,7 +244,7 @@ func cleanClinicalPharmacology(label *Label) {
 	})
 }
 
-func cleanIndicationsUsageAndDosage(label *Label) {
+func cleanIndicationsUsageAndDosage(label *DrugLabel) {
 	basePrefixSanitizer(&[]attributeFilterMapHelper{
 		{&label.IndicationsAndUsage, []string{
 			"Indications & usage",
@@ -265,7 +265,7 @@ func cleanIndicationsUsageAndDosage(label *Label) {
 /*
  */
 
-func cleanPatientInformation(label *Label) {
+func cleanPatientInformation(label *DrugLabel) {
 	basePrefixSanitizer(&[]attributeFilterMapHelper{
 		{&label.SPLPatientPackageInsert, []string{"SPL Patient Package Insert"}},
 		{&label.InformationForPatients, []string{
@@ -286,7 +286,7 @@ func cleanPatientInformation(label *Label) {
 		{&label.SPLMedguide, []string{"SPL Medguide", "MEDICATION GUIDE "}},
 	})
 }
-func cleanSpecialPopulations(label *Label) {
+func cleanSpecialPopulations(label *DrugLabel) {
 	basePrefixSanitizer(&[]attributeFilterMapHelper{
 		{&label.UseInSpecificPopulations, []string{"Use in Specific Populations"}},
 		{&label.Pregnancy, []string{"Pregnancy"}},
@@ -302,7 +302,7 @@ func cleanSpecialPopulations(label *Label) {
 		{&label.GeriatricUse, []string{"Geriatric use", "Geriatric Use "}},
 	})
 }
-func cleanToxicology(label *Label) {
+func cleanToxicology(label *DrugLabel) {
 	basePrefixSanitizer(&[]attributeFilterMapHelper{
 		{&label.NonclinicalToxicology, []string{
 			"Non-clinical Toxicology",
@@ -323,14 +323,14 @@ func cleanToxicology(label *Label) {
 	})
 }
 
-func cleanReferences(label *Label) {
+func cleanReferences(label *DrugLabel) {
 	basePrefixSanitizer(&[]attributeFilterMapHelper{
 		{&label.ClinicalStudies, []string{"Clinical Studies"}},
 		// {&label.ClinicalStudiesTable, []string{"ClinicalStudiesTable"}},
 		{&label.References, []string{"References"}},
 	})
 }
-func cleanSupplyStorageAndHandling(label *Label) {
+func cleanSupplyStorageAndHandling(label *DrugLabel) {
 	basePrefixSanitizer(&[]attributeFilterMapHelper{
 		{&label.HowSupplied, []string{
 			"How Supplied",
@@ -342,7 +342,7 @@ func cleanSupplyStorageAndHandling(label *Label) {
 	})
 
 }
-func cleanWarningsAndPrecautions(label *Label) {
+func cleanWarningsAndPrecautions(label *DrugLabel) {
 	basePrefixSanitizer(&[]attributeFilterMapHelper{
 		{&label.BoxedWarning, []string{"Boxed Warning"}},
 		{&label.WarningsAndCautions, []string{
@@ -356,7 +356,7 @@ func cleanWarningsAndPrecautions(label *Label) {
 		{&label.GeneralPrecautions, []string{"General Precautions"}},
 	})
 }
-func cleanOtherFields(label *Label) {
+func cleanOtherFields(label *DrugLabel) {
 	basePrefixSanitizer(&[]attributeFilterMapHelper{
 		{&label.LaboratoryTests, []string{"Laboratory Tests"}},
 		{&label.RecentMajorChanges, []string{"Recent Major Changes"}},

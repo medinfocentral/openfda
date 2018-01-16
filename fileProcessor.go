@@ -7,7 +7,7 @@ import (
 
 // DrugLabelsFile is a struct that encapsulates an array of Labels
 type DrugLabelsFile struct {
-	Results []Label `json:"results"`
+	Results []DrugLabel `json:"results"`
 }
 
 // DrugLabelsFileProcessor specifies how the processor should run
@@ -28,7 +28,7 @@ type DrugLabelsFileProcessor struct {
 		SkipOtherFields                   bool
 	}
 
-	Labels []Label
+	Labels []DrugLabel
 }
 
 // NewProcessor creates a new default Processor
