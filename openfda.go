@@ -7,14 +7,9 @@ type OpenFDA struct {
 	ApplicationNumber []string `json:"application_number,omitempty" bson:"application_number,omitempty"`
 	ManufacturerName  []string `json:"manufacturer_name,omitempty" bson:"manufacturer_name,omitempty"`
 
-	BrandNameList []string `json:"brand_name,omitempty" bson:"brand_name_list,omitempty"`
-	BrandName     string   `json:"brand,omitempty" bson:"brand_name,omitempty"`
-
-	GenericNameList []string `json:"generic_name,omitempty" bson:"generic_name_list,omitempty"`
-	GenericName     string   `json:"generic,omitempty" bson:"generic_name,omitempty"`
-
-	ProductNDCList []string `json:"product_ndc,omitempty" bson:"product_ndc_list,omitempty"`
-	ProductNDC     string   `json:"ndc,omitempty" bson:"ndc,omitempty"`
+	BrandName   string `json:"brand_name,omitempty" bson:"brand_name,omitempty"`
+	GenericName string `json:"generic_name,omitempty" bson:"generic_name,omitempty"`
+	ProductNDC  string `json:"product_ndc,omitempty" bson:"product_ndc,omitempty"`
 
 	NUI           []string `json:"nui,omitempty" bson:"nui,omitempty"`
 	PackageNDC    []string `json:"package_ndc,omitempty" bson:"package_ndc,omitempty"`
