@@ -1,10 +1,5 @@
 package openfda
 
-import (
-	"fmt"
-	"regexp"
-)
-
 type OpenFDA struct {
 	SPLID    []string `json:"spl_id,omitempty" bson:"spl_id,omitempty"`
 	SPLSetID []string `json:"spl_set_id,omitempty" bson:"spl_set_id,omitempty"`
@@ -136,15 +131,4 @@ type DrugLabel struct {
 	Microbiology                      []string `json:"microbiology,omitempty" bson:"microbiology,omitempty"`
 	PackageLabelPrincipalDisplayPanel []string `json:"package_label_principal_display_panel,omitempty" bson:"package_label_principal_display_panel,omitempty"`
 	SPLUnclassifiedSection            []string `json:"spl_unclassified_section,omitempty" bson:"spl_unclassified_section,omitempty"`
-}
-
-func (label DrugLabel) String() string {
-	return fmt.Sprintf("%s \"%s\" \"%s\"", label.SetID, label.OpenFDA.BrandName, label.OpenFDA.GenericName)
-}
-
-var labelsIDRegex = regexp.MustCompile("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
-
-// IsValidLabelID checks to ensure that a string is a valid id
-func IsValidLabelID(id string) bool {
-	return labelsIDRegex.MatchString(id)
 }
