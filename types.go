@@ -16,15 +16,15 @@ type OpenFDA struct {
 	GenericName string `json:"generic_name,omitempty" bson:"generic_name,omitempty"`
 
 	// different from spec
-	ProductNDC string `json:"product_ndc,omitempty" bson:"product_ndc,omitempty"`
+	ProductType string `json:"product_type,omitempty" bson:"product_type,omitempty"`
 
+	ProductNDC    []string `json:"product_ndc,omitempty" bson:"product_ndc,omitempty"`
 	NUI           []string `json:"nui,omitempty" bson:"nui,omitempty"`
 	PackageNDC    []string `json:"package_ndc,omitempty" bson:"package_ndc,omitempty"`
 	PharmClassCS  []string `json:"pharm_class_cs,omitempty" bson:"pharm_class_cs,omitempty"`
 	PharmClassEPC []string `json:"pharm_class_epc,omitempty" bson:"pharm_class_epc,omitempty"`
 	PharmClassMOA []string `json:"pharm_class_moa,omitempty" bson:"pharm_class_moa,omitempty"`
 	PharmClassPE  []string `json:"pharm_class_pe,omitempty" bson:"pharm_class_pe,omitempty"`
-	ProductType   []string `json:"product_type,omitempty" bson:"product_type,omitempty"`
 	Route         []string `json:"route,omitempty" bson:"route,omitempty"`
 	RxCUI         []string `json:"rxcui,omitempty" bson:"rxcui,omitempty"`
 	SubstanceName []string `json:"substance_name,omitempty" bson:"substance_name,omitempty"`
