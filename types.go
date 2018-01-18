@@ -1,5 +1,7 @@
 package openfda
 
+// OpenFDA specifies openFDA fields datastructure as described on open.fda.gov
+// with a few minor changes noted below
 type OpenFDA struct {
 	SPLID    []string `json:"spl_id,omitempty" bson:"spl_id,omitempty"`
 	SPLSetID []string `json:"spl_set_id,omitempty" bson:"spl_set_id,omitempty"`
@@ -9,8 +11,10 @@ type OpenFDA struct {
 
 	// different from spec
 	BrandName string `json:"brand_name,omitempty" bson:"brand_name,omitempty"`
+
 	// different from spec
 	GenericName string `json:"generic_name,omitempty" bson:"generic_name,omitempty"`
+
 	// different from spec
 	ProductNDC string `json:"product_ndc,omitempty" bson:"product_ndc,omitempty"`
 
@@ -33,10 +37,6 @@ type OpenFDA struct {
 
 // Label specifies a label as described on open.fda.gov
 type DrugLabel struct {
-	//
-	// openfda drug label specification
-	//
-
 	// openfda
 	OpenFDA OpenFDA `json:"openfda,omitempty"`
 
