@@ -7,7 +7,9 @@ type OpenFDA struct {
 	SPLSetID []string `json:"spl_set_id,omitempty" bson:"spl_set_id,omitempty"`
 
 	ApplicationNumber []string `json:"application_number,omitempty" bson:"application_number,omitempty"`
-	ManufacturerName  []string `json:"manufacturer_name,omitempty" bson:"manufacturer_name,omitempty"`
+
+	// different from spec
+	ManufacturerName string `json:"manufacturer_name,omitempty" bson:"manufacturer_name,omitempty"`
 
 	// different from spec
 	BrandName string `json:"brand_name,omitempty" bson:"brand_name,omitempty"`
