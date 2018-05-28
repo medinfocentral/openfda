@@ -1,13 +1,8 @@
 package openfda
 
 import (
-	"fmt"
 	"regexp"
 )
-
-func (label DrugLabel) String() string {
-	return fmt.Sprintf("%s \"%s\" \"%s\"", label.SetID, label.OpenFDA.BrandName, label.OpenFDA.GenericName)
-}
 
 var labelsIDRegex = regexp.MustCompile("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
 

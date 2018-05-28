@@ -1,4 +1,4 @@
-package main
+package openfda
 
 import "github.com/globalsign/mgo/bson"
 
@@ -16,7 +16,7 @@ type Drug struct {
 	GenericName       []string `json:"generic_name,omitempty" bson:"generic_name,omitempty"`
 
 	// different from spec
-	ProductType string `json:"product_type,omitempty" bson:"product_type,omitempty"`
+	ProductType []string `json:"product_type,omitempty" bson:"product_type,omitempty"`
 
 	ProductNDC    []string `json:"product_ndc,omitempty" bson:"product_ndc,omitempty"`
 	NUI           []string `json:"nui,omitempty" bson:"nui,omitempty"`
@@ -32,5 +32,5 @@ type Drug struct {
 	UPC           []string `json:"upc,omitempty" bson:"upc,omitempty"`
 
 	// Undocumented Fields Found In Responses
-	IsOriginalPackager bool `json:"is_original_packager,omitempty" bson:"is_original_packager,omitempty"`
+	IsOriginalPackager []bool `json:"is_original_packager,omitempty" bson:"is_original_packager,omitempty"`
 }
