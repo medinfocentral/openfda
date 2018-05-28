@@ -11,15 +11,9 @@ type Drug struct {
 	SPLSetID []string `json:"spl_set_id,omitempty" bson:"spl_set_id,omitempty"`
 
 	ApplicationNumber []string `json:"application_number,omitempty" bson:"application_number,omitempty"`
-
-	// different from spec
-	ManufacturerName string `json:"manufacturer_name,omitempty" bson:"manufacturer_name,omitempty"`
-
-	// different from spec
-	BrandName string `json:"brand_name,omitempty" bson:"brand_name,omitempty"`
-
-	// different from spec
-	GenericName string `json:"generic_name,omitempty" bson:"generic_name,omitempty"`
+	ManufacturerName  []string `json:"manufacturer_name,omitempty" bson:"manufacturer_name,omitempty"`
+	BrandName         []string `json:"brand_name,omitempty" bson:"brand_name,omitempty"`
+	GenericName       []string `json:"generic_name,omitempty" bson:"generic_name,omitempty"`
 
 	// different from spec
 	ProductType string `json:"product_type,omitempty" bson:"product_type,omitempty"`
@@ -38,5 +32,5 @@ type Drug struct {
 	UPC           []string `json:"upc,omitempty" bson:"upc,omitempty"`
 
 	// Undocumented Fields Found In Responses
-	IsOriginalPackager []bool `json:"is_original_packager,omitempty" bson:"is_original_packager,omitempty"`
+	IsOriginalPackager bool `json:"is_original_packager,omitempty" bson:"is_original_packager,omitempty"`
 }
