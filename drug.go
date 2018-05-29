@@ -1,14 +1,16 @@
 package openfda
 
-import "github.com/globalsign/mgo/bson"
+import (
+	"regexp"
+	"time"
+)
 
 // Drug specifies openFDA fields datastructure as described on open.fda.gov
 // with a few minor changes noted below
 type Drug struct {
-	ID bson.ObjectId `json:"_id" bson:"_id"`
-
 	SPLID    []string `json:"spl_id,omitempty" bson:"spl_id,omitempty"`
-	SPLSetID []string `json:"spl_set_id,omitempty" bson:"spl_set_id,omitempty"`
+	SPLSetID []string `json:"spl_set_id,omitempty" bson:"-"`
+	ID       string   `json:"-" bson:"_id"`
 
 	ApplicationNumber []string `json:"application_number,omitempty" bson:"application_number,omitempty"`
 	ManufacturerName  []string `json:"manufacturer_name,omitempty" bson:"manufacturer_name,omitempty"`
@@ -33,4 +35,18 @@ type Drug struct {
 
 	// Undocumented Fields Found In Responses
 	IsOriginalPackager []bool `json:"is_original_packager,omitempty" bson:"is_original_packager,omitempty"`
+
+	// from nsde
+	MarketingCategory  string     `json:"marketing_category,omitempty" bson:"marketing_category,omitempty"`
+	MarketingStartDate *time.Time `json:"marketing_start_date,omitempty" bson:"marketing_start_date,omitempty"`
+	MarketingEndDate   *time.Time `json:"marketing_end_date,omitempty" bson:"marketing_end_date,omitempty"`
+}
+
+var labelsIDRegex = regexp.MustCompile("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
+
+type LabelID string
+
+// IsValidLabelID checks to ensure that a string is a valid id
+func (labelID LabelID) Valid() bool {
+	return labelsIDRegex.MatchString(string(labelID))
 }
