@@ -1,6 +1,8 @@
 package openfda
 
 import (
+	"encoding/json"
+	"fmt"
 	"regexp"
 	"time"
 )
@@ -49,4 +51,20 @@ type LabelID string
 // IsValidLabelID checks to ensure that a string is a valid id
 func (labelID LabelID) Valid() bool {
 	return labelsIDRegex.MatchString(string(labelID))
+}
+
+func (labelID LabelID) MarshalJSON() ([]byte, error) {
+	return json.Marshal(string(labelID))
+}
+
+func (labelID *LabelID) UnmarshalJSON(data []byte) error {
+	var labelIDStr string
+	if err := json.Unmarshal(data, &labelIDStr); err != nil {
+		return fmt.Errorf("could not parse LabelID: %s", err)
+	}
+	(*labelID) = LabelID(labelIDStr)
+	if !labelID.Valid() {
+		return fmt.Errorf("invalid labelID %q", labelID)
+	}
+	return nil
 }
