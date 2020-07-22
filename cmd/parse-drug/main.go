@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -9,7 +10,9 @@ import (
 	"path"
 	"time"
 
-	"github.com/globalsign/mgo"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+
 	"github.com/medinfocentral/openfda"
 )
 
@@ -17,6 +20,12 @@ func main() {
 	if len(os.Args) < 2 {
 		log.Fatal("please enter a directory path")
 	}
+
+	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(os.Getenv("MONGO_URL")))
+	if err != nil {
+		log.Fatal(err)
+	}
+	db := client.Database("mic")
 
 	dirPath := os.Args[1]
 
@@ -52,12 +61,6 @@ func main() {
 	// }
 	// defer of.Close()
 	// ofe := json.NewEncoder(of)
-
-	sess, err := mgo.Dial(":27017")
-	if err != nil {
-		log.Fatal(err)
-	}
-	db := sess.DB("mic")
 
 	for _, info := range fileInfos {
 		fmt.Println(info.Name())
@@ -105,7 +108,7 @@ func main() {
 
 			if len(d.Drug.SPLSetID) == 1 {
 				d.Drug.ID = d.Drug.SPLSetID[0]
-				if err := db.C("drugs").Insert(d.Drug); err != nil {
+				if _, err := db.Collection("drugs").InsertOne(context.Background(), d.Drug); err != nil {
 					fmt.Printf("%q %q", err.Error(), d.Drug.ID)
 				}
 			} else {
