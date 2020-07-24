@@ -1,4 +1,4 @@
-mkdir drug-label
+mkdir -p drug-label
 
 cd drug-label || exit
   curl -O https://download.open.fda.gov/drug/label/drug-label-0001-of-0009.json.zip
@@ -13,10 +13,10 @@ cd drug-label || exit
   unzip '*.json.zip'
 cd - || exit
 
+mkdir -p nsde
 cd nsde || exit
   curl -O https://download.open.fda.gov/other/nsde/other-nsde-0001-of-0002.json.zip
   curl -O https://download.open.fda.gov/other/nsde/other-nsde-0002-of-0002.json.zip
   unzip '*.json.zip'
 cd - || exit
 
-go run main.go
