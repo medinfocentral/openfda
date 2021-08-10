@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-// Drug specifies openFDA fields datastructure as described on open.fda.gov
+// Drug specifies openFDA fields data structure as described on open.fda.gov
 // with a few minor changes noted below
 type Drug struct {
 	SPLID    []string `json:"spl_id,omitempty" bson:"spl_id,omitempty"`
@@ -20,6 +20,7 @@ type Drug struct {
 	GenericName       []string `json:"generic_name,omitempty" bson:"generic_name,omitempty"`
 
 	// different from spec
+
 	ProductType []string `json:"product_type,omitempty" bson:"product_type,omitempty"`
 
 	ProductNDC    []string `json:"product_ndc,omitempty" bson:"product_ndc,omitempty"`
@@ -36,9 +37,11 @@ type Drug struct {
 	UPC           []string `json:"upc,omitempty" bson:"upc,omitempty"`
 
 	// Undocumented Fields Found In Responses
+
 	IsOriginalPackager []bool `json:"is_original_packager,omitempty" bson:"is_original_packager,omitempty"`
 
-	// from nsde
+	// from NSDE
+
 	MarketingCategory  string     `json:"marketing_category,omitempty" bson:"marketing_category,omitempty"`
 	MarketingStartDate *time.Time `json:"marketing_start_date,omitempty" bson:"marketing_start_date,omitempty"`
 	MarketingEndDate   *time.Time `json:"marketing_end_date,omitempty" bson:"marketing_end_date,omitempty"`
@@ -48,7 +51,7 @@ var labelsIDRegex = regexp.MustCompile("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-
 
 type LabelID string
 
-// IsValidLabelID checks to ensure that a string is a valid id
+// Valid checks to ensure that a string is a valid id
 func (labelID LabelID) Valid() bool {
 	return labelsIDRegex.MatchString(string(labelID))
 }
@@ -62,9 +65,9 @@ func (labelID *LabelID) UnmarshalJSON(data []byte) error {
 	if err := json.Unmarshal(data, &labelIDStr); err != nil {
 		return fmt.Errorf("could not parse LabelID: %s", err)
 	}
-	(*labelID) = LabelID(labelIDStr)
+	*labelID = LabelID(labelIDStr)
 	if !labelID.Valid() {
-		return fmt.Errorf("invalid labelID %q", labelID)
+		return fmt.Errorf("invalid labelID %q", string(*labelID))
 	}
 	return nil
 }
