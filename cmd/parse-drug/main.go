@@ -88,7 +88,7 @@ func main() {
 			var (
 				start, end *time.Time
 			)
-			if d.Drug.IsHumanPresecriptionDrug() {
+			if d.Drug.IsHumanPrescriptionDrug() {
 				for _, id := range d.Drug.PackageNDC {
 					if en, ok := nsde[id]; ok {
 						nEnd, err := time.Parse("20060102", en.MarketingEndDate)
@@ -112,12 +112,12 @@ func main() {
 					fmt.Printf("%q %q", err.Error(), d.Drug.ID)
 				}
 			} else {
-				if d.Drug.IsHumanPresecriptionDrug() {
+				if d.Drug.IsHumanPrescriptionDrug() {
 					fmt.Println(d.Drug)
 				}
 			}
 		}
 
-		f.Close()
+		_ = f.Close()
 	}
 }

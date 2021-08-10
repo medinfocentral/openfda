@@ -7,7 +7,7 @@ type DrugLabel struct {
 	ID            string `json:"id" bson:"_id"`
 	Version       int    `json:"version,string" bson:"version,omitempty"`
 
-	// Abuse and overdosage
+	// Abuse and over-dosage
 	DrugAbuseAndDependence []string `json:"drug_abuse_and_dependence,omitempty" bson:"drug_abuse_and_dependence,omitempty"`
 	ControlledSubstance    []string `json:"controlled_substance,omitempty" bson:"controlled_substance,omitempty"`
 	Abuse                  []string `json:"abuse,omitempty" bson:"abuse,omitempty"`

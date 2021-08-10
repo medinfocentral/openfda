@@ -1,18 +1,16 @@
 package openfda
 
 const (
-	// ProductTypeHumanPrescriptionDrug remamed "HUMAN PRESCRIPTION DRUG" to "RX"
+	// ProductTypeHumanPrescriptionDrug renamed "HUMAN PRESCRIPTION DRUG" to "RX"
 	ProductTypeHumanPrescriptionDrug = "RX"
 
-	// ProductTypeHumanOTCDrug remamed "HUMAN OTC DRUG" to "OTC"
+	// ProductTypeHumanOTCDrug renamed "HUMAN OTC DRUG" to "OTC"
 	ProductTypeHumanOTCDrug = "OTC"
-
-	ProductTypeHumanPerscriptionDrug = "HUMAN PRESCRIPTION DRUG"
 )
 
-func (d Drug) IsHumanPresecriptionDrug() bool {
+func (d Drug) IsHumanPrescriptionDrug() bool {
 	for _, tp := range d.ProductType {
-		if tp == ProductTypeHumanPerscriptionDrug {
+		if tp == ProductTypeHumanPrescriptionDrug {
 			return true
 		}
 	}
